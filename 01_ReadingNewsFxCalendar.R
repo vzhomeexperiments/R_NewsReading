@@ -1,0 +1,79 @@
+# Forex News Reading from R and limit the tradings
+# <06/12/2016>
+# (C) Vladimir Zhbanko
+
+# load libraries
+library(rvest)
+library(lubridate)
+library(readxl)
+library(stringr)
+
+# summary of actions
+# import events list subjected to trade restrictions from xls file
+# get url data columns
+# create data frame
+
+# read restricted news events as strings
+restrictedEvents <- read_excel("C:/Users/fxtrams/Documents/00_FXTRAMS_2.0/03_AnalyticalCentre/06_NewsReading/02_RestrictedEvents.xlsx",
+                               col_names = F)
+
+# get url to access the data. URL shall be like this: "http://www.forexfactory.com/calendar.php?day=dec2.2016"
+url <- paste("http://www.forexfactory.com/calendar.php?day=",
+             month(Sys.Date(), label = TRUE),
+             day(Sys.Date()), ".",
+             year(Sys.Date()), sep = "")
+
+# TEST URL
+#url <- "http://www.forexfactory.com/calendar.php?day=dec12.2016"
+
+# get the raw data from web
+fxcal <- url %>% 
+  read_html() 
+
+# get the currency column for the day
+currency <- fxcal %>%
+  html_nodes(".currency") %>%
+  html_text()
+
+# get the event info for the day
+event <- fxcal %>% 
+  html_nodes(".calendar__event-title") %>% 
+  html_text()
+
+# create data frame
+todaysEvents <- data.frame(currency, event, stringsAsFactors = FALSE) #%>% View()
+
+# add new column in this frame
+todaysEvents$trading <- 1
+flag <- 0
+
+# scrol through the data frame todaysEvents and match the strings to content of the event column,
+# if match is found write to new column "0" that will be interpreted as a NO trade
+for (j in 1:nrow(restrictedEvents))
+  {
+    matchingterm <- restrictedEvents[j, ]  
+    
+    for(i in 1:nrow(todaysEvents))
+        {
+          if(str_detect(todaysEvents[i, 2], matchingterm) == TRUE) 
+             {
+                todaysEvents[i, 3] <- 0
+                flag <- 1
+                break
+             }
+      
+        }
+}
+
+# write the results of the all events (for user control purposes)
+write.csv(todaysEvents, paste("C:/Users/fxtrams/Documents/00_FXTRAMS_2.0/02_TradingDB/02_NewsEventsLogs/", Sys.Date(), ".csv", sep = ""))
+
+# analyse obtained dataframe, if 0 in any row then write 1 to file, if there is only 1 then write 0 to file, do so for all terminals!
+#Terminal 1
+write.csv(flag, "C:/Program Files (x86)/FxPro - Terminal1/MQL4/Files/01_MacroeconomicEvent.csv", row.names = F)
+#Terminal 2
+write.csv(flag, "C:/Program Files (x86)/FxPro - Terminal2/MQL4/Files/01_MacroeconomicEvent.csv", row.names = F)
+#Terminal 3
+write.csv(flag, "C:/Program Files (x86)/FxPro - Terminal3/MQL4/Files/01_MacroeconomicEvent.csv", row.names = F)
+#Terminal 4
+write.csv(flag, "C:/Program Files (x86)/FxPro - Terminal4/MQL4/Files/01_MacroeconomicEvent.csv", row.names = F)
