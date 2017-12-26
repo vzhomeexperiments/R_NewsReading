@@ -14,3 +14,7 @@ Everything what is needed to arrange the news reading:
 - List of Restricted Events
 - Bat file
 - Windows Task Scheduler Job
+
+# Want to learn how to use it?
+
+https://www.udemy.com/draft/1482436/?couponCode=LAZYTRADE5-20
