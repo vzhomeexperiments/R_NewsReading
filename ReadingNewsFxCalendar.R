@@ -51,13 +51,14 @@ flag <- 0
 # if match is found write to new column "0" that will be interpreted as a NO trade
 for (j in 1:nrow(restrictedEvents))
   {
-    j <- 1  
-    matchingterm <- restrictedEvents[j, ]  %>% as.vector()
+    
+    matchingterm <- restrictedEvents[j, ] 
+    matchingterm.v <- matchingterm$X__1
     
     for(i in 1:nrow(todaysEvents))
         {
-          i <- 1
-          if(str_detect(todaysEvents[i, 2], matchingterm) == TRUE) 
+          
+          if(str_detect(todaysEvents[i, 2], matchingterm.v) == TRUE) 
              {
                 todaysEvents[i, 3] <- 0
                 flag <- 1
