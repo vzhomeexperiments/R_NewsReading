@@ -1,6 +1,6 @@
 # Forex News Reading from R and limit the tradings
-# <06/12/2016>
-# (C) Vladimir Zhbanko
+# Lazy Trading Course: Read news and Sentiment Analysis
+# (C) 2018 Vladimir Zhbanko
 
 # load libraries
 library(rvest)
@@ -14,7 +14,7 @@ library(stringr)
 # create data frame
 
 # read restricted news events as strings
-restrictedEvents <- read_excel("C:/Users/fxtrams/Documents/00_FXTRAMS_2.0/03_AnalyticalCentre/06_NewsReading/02_RestrictedEvents.xlsx",
+restrictedEvents <- read_excel("C:/Users/fxtrams/Documents/000_TradingRepo/R_NewsReading/RestrictedEvents.xlsx",
                                col_names = F)
 
 # get url to access the data. URL shall be like this: "http://www.forexfactory.com/calendar.php?day=dec2.2016"
@@ -51,10 +51,12 @@ flag <- 0
 # if match is found write to new column "0" that will be interpreted as a NO trade
 for (j in 1:nrow(restrictedEvents))
   {
-    matchingterm <- restrictedEvents[j, ]  
+    j <- 1  
+    matchingterm <- restrictedEvents[j, ]  %>% as.vector()
     
     for(i in 1:nrow(todaysEvents))
         {
+          i <- 1
           if(str_detect(todaysEvents[i, 2], matchingterm) == TRUE) 
              {
                 todaysEvents[i, 3] <- 0
@@ -66,7 +68,7 @@ for (j in 1:nrow(restrictedEvents))
 }
 
 # write the results of the all events (for user control purposes)
-write.csv(todaysEvents, paste("C:/Users/fxtrams/Documents/00_FXTRAMS_2.0/02_TradingDB/02_NewsEventsLogs/", Sys.Date(), ".csv", sep = ""))
+write.csv(todaysEvents, paste("C:/Users/fxtrams/Documents/000_TradingRepo/R_NewsReading/log/log-", Sys.Date(), ".csv", sep = ""))
 
 # analyse obtained dataframe, if 0 in any row then write 1 to file, if there is only 1 then write 0 to file, do so for all terminals!
 #Terminal 1

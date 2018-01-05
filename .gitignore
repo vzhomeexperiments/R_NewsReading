@@ -1,1 +1,3 @@
 *.xml
+.Rproj.user
+log/
