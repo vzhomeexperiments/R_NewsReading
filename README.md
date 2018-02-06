@@ -18,3 +18,9 @@ Everything what is needed to arrange the news reading:
 # Want to learn how to use it?
 
 https://www.udemy.com/draft/1482436/?couponCode=LAZYTRADE5-20
+
+Join these UDEMY courses with a tremendious discount!
+
+* https://www.udemy.com/your-trading-journal/?couponCode=LAZYTRADE-GIT
+* https://www.udemy.com/your-trading-robot/?couponCode=LAZYTRADE-GIT
+* https://www.udemy.com/your-home-trading-environment/?couponCode=LAZYTRADE-GIT
