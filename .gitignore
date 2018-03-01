@@ -1,3 +1,5 @@
 *.xml
 .Rproj.user
 log/
+.RData
+.Rhistory
