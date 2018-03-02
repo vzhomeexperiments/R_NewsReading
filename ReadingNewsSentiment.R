@@ -46,5 +46,5 @@ decision <- function(pair, based, quoted, diff, sb_path){
 
 # decisions
 decision("GBPUSD", ave_UK, ave_US, 0.02, getwd())
-decision("USDCAD", ave_UK, ave_US, 0.02, getwd()) #sell
-decision("GBPCAD", ave_UK, ave_US, 0.02, getwd()) # 
+decision("USDCAD", ave_US, ave_CA, 0.02, getwd()) 
+decision("GBPCAD", ave_UK, ave_CA, 0.02, getwd()) 
