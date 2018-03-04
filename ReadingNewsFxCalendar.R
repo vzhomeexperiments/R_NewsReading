@@ -29,18 +29,13 @@ url <- paste("http://www.forexfactory.com/calendar.php?day=",
 #url <- "http://www.forexfactory.com/calendar.php?day=dec12.2016"
 
 # get the raw data from web
-fxcal <- url %>% 
-  read_html() 
+fxcal <- url %>% read_html() 
 
 # get the currency column for the day
-currency <- fxcal %>%
-  html_nodes(".currency") %>%
-  html_text()
+currency <- fxcal %>% html_nodes(".currency") %>% html_text()
 
 # get the event info for the day
-event <- fxcal %>% 
-  html_nodes(".calendar__event-title") %>% 
-  html_text()
+event <- fxcal %>% html_nodes(".calendar__event-title") %>% html_text()
 
 # create data frame
 todaysEvents <- data.frame(currency, event, stringsAsFactors = FALSE) #%>% View()
@@ -73,7 +68,7 @@ for (j in 1:nrow(restrictedEvents))
 # write the results of the all events (for user control purposes)
 write.csv(todaysEvents, paste("C:/Users/fxtrams/Documents/000_TradingRepo/R_NewsReading/log/log-", Sys.Date(), ".csv", sep = ""))
 
-# analyse obtained dataframe, if 0 in any row then write 1 to file, if there is only 1 then write 0 to file, do so for all terminals!
+# write obtained dataframe to all terminals!
 #Terminal 1
 write.csv(flag, "C:/Program Files (x86)/FxPro - Terminal1/MQL4/Files/01_MacroeconomicEvent.csv", row.names = F)
 #Terminal 2
@@ -82,3 +77,35 @@ write.csv(flag, "C:/Program Files (x86)/FxPro - Terminal2/MQL4/Files/01_Macroeco
 write.csv(flag, "C:/Program Files (x86)/FxPro - Terminal3/MQL4/Files/01_MacroeconomicEvent.csv", row.names = F)
 #Terminal 4
 write.csv(flag, "C:/Program Files (x86)/FxPro - Terminal4/MQL4/Files/01_MacroeconomicEvent.csv", row.names = F)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
