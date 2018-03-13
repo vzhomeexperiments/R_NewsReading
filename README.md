@@ -17,7 +17,7 @@ Everything what is needed to arrange the news reading:
 
 # Want to learn how to use it?
 
-https://www.udemy.com/draft/1482436/?couponCode=LAZYTRADE5-20
+https://www.udemy.com/forex-news-and-sentiment-analysis/?couponCode=LAZYTRADE1-10
 
 Join these UDEMY courses with a tremendious discount!
 

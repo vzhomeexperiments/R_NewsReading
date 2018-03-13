@@ -1,7 +1,7 @@
 # Forex News Reading from R and limit the tradings
 # Lazy Trading Course: Read news and Sentiment Analysis
 # (C) 2018 Vladimir Zhbanko
-# https:/www.udemy.com/draft/1482436/?couponCode=LAZYTRADE5-20
+# https://www.udemy.com/forex-news-and-sentiment-analysis/?couponCode=LAZYTRADE1-10
 
 
 # load libraries
