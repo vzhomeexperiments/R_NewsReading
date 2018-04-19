@@ -34,13 +34,13 @@ ggplot(S_LOG_W, aes(UK, CA))+geom_point()
 ggplot(S_LOG_W, aes(UK, US))+geom_point()
 
 # absolute difference between values
-S_LOG_Diff <- S_LOG_W %>% mutate(ca_uk = abs(abs(CA)- abs(US)),
-                                 uk_ca = abs(abs(UK)- abs(CA)),
-                                 uk_us = abs(abs(UK)- abs(US)))
+S_LOG_Diff <- S_LOG_W %>% mutate(uk_us = abs(abs(UK)- abs(US)),
+                                 us_ca = abs(abs(US)- abs(CA)),
+                                 uk_ca = abs(abs(UK)- abs(CA)))
 
 # make it long and plot it then see changed treshold value 2018-04-19
-S_LOG_Diff %>% select(day, ca_uk, uk_ca, uk_us) %>% 
-  gather(key = pairing, difference, ca_uk, uk_ca, uk_us) %>% 
+S_LOG_Diff %>% select(day, uk_us, us_ca, uk_ca) %>% 
+  gather(key = pairing, difference, uk_us, us_ca, uk_ca) %>% 
   ggplot(aes(day, difference))+geom_line()+
   facet_grid(~pairing)+
   geom_hline(aes(yintercept = 0.02, col = "before"))+
