@@ -74,9 +74,9 @@ write_news_sentiment_decision <- function(pair_string,
 path_T2 <- "C:/Program Files (x86)/FxPro - Terminal2/MQL4/Files"
 
 # decisions writing to the sandbox
-write_news_sentiment_decision("GBPUSD", ave_UK, ave_US, 0.02, path_T2)
-write_news_sentiment_decision("USDCAD", ave_US, ave_CA, 0.02, path_T2) 
-write_news_sentiment_decision("GBPCAD", ave_UK, ave_CA, 0.02, path_T2) 
+write_news_sentiment_decision("GBPUSD", ave_UK, ave_US, 0.1, path_T2)
+write_news_sentiment_decision("USDCAD", ave_US, ave_CA, 0.1, path_T2) 
+write_news_sentiment_decision("GBPCAD", ave_UK, ave_CA, 0.1, path_T2) 
 
 # Result: DSS generates the file in the Sandbox. This file will be used in MQL by the Trading System
 
