@@ -7,6 +7,7 @@
 # plot the obtained average polarity scores over time
 
 library(tidyverse)
+library(lubridate)
 # create list of files
 filesToAdd <-list.files("C:/Users/fxtrams/Documents/000_TradingRepo/R_NewsReading/log", pattern="s_log", full.names=TRUE)
 
@@ -46,4 +47,58 @@ S_LOG_Diff %>% select(day, uk_us, us_ca, uk_ca) %>%
   facet_grid(~pairing)+
   geom_hline(aes(yintercept = 0.02, col = "before"))+
   geom_hline(aes(yintercept = 0.1, col = "after"))
+
+
+## ================ Trying to investigate //DRAFT// ===================
+# bringing trading results to this graph
+# terminal 2 path *** make sure to customize this path
+path_T2 <- "C:/Program Files (x86)/FxPro - Terminal2/MQL4/Files/"
+
+# -------------------------
+# read data from trades in terminal 1
+# -------------------------
+DFT2 <- try(read_csv(file = file.path(path_T2, "OrdersResultsT2.csv"), 
+                     col_names = c("MagicNumber", "TicketNumber", "OrderStartTime", 
+                                   "OrderCloseTime", "Profit", "Symbol", "OrderType"),
+                     col_types = "iiccdci"), 
+            silent = TRUE)
+
+DF1 <- DFT2 %>% 
+  #filter to have only results from FALCON_S
+  filter(MagicNumber >= 8136204, MagicNumber <= 8136205) %>% 
+  select(MagicNumber, OrderStartTime, Profit, Symbol, OrderType)
+
+DF1$MagicNumber <- as.factor(DF1$MagicNumber)
+DF1$OrderStartTime <- ymd_hms(DF1$OrderStartTime)
+DF1$Symbol <- as.factor(DF1$Symbol)
+DF1$OrderType <- as.factor(DF1$OrderType)
+
+
+# round the dates in both frames
+df1 <- S_LOG_Diff %>% select(day, uk_us, us_ca, uk_ca) %>% 
+  gather(key = pairing, difference, uk_us, us_ca, uk_ca)
+df1$day <- round_date(df1$day, unit = "hour")
+df1$day <- df1$day + 3600
+
+DF1$OrderStartTime <- round_date(DF1$OrderStartTime, unit = "hour")
+
+# rename the values to match symbol
+library(plyr)
+
+
+df1$pairing <-  mapvalues(df1$pairing, from = c("uk_us", "us_ca", "uk_ca"), to = c("GBPUSD", "USDCAD", "GBPCAD"))
+
+# join
+DF3 <- DF1 %>% inner_join(df1, by = c("OrderStartTime" = "day"))
+
+library(dplyr)
+
+df4 <- DF3 %>% filter(difference > 0.1) %>% 
+  # after applying changes
+  filter(OrderStartTime > "2018-04-19") %>% 
+  group_by(MagicNumber) %>% 
+  arrange(MagicNumber) %>% 
+  summarise(pnl = sum(Profit),
+            ntr = n())
+
 
