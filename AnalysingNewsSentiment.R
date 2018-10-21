@@ -27,6 +27,11 @@ for (FILE in filesToAdd) {
 ggplot(S_LOG, aes(x = day, y = ave_pol)) + geom_line()+facet_grid(~country)+
   geom_hline(aes(yintercept = 0, col = "zero"))
 
+ggplot(S_LOG, aes(x = day, y = ave_pol)) + geom_line()+facet_grid(country~.)+
+  geom_hline(aes(yintercept = 0, col = "zero"))+
+  ggtitle("Average Polarity Scores of News Headers by Country in 2018",
+          "sourced from yahoo.ca, yahoo.us, yahoo.uk 3x day")
+
 # some data manipulation?
 S_LOG_W <- spread(S_LOG, key = country, value = ave_pol)
 
