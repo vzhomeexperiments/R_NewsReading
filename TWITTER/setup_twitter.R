@@ -33,9 +33,10 @@ setup_twitter_oauth(consumer_key = ConsumerAPIkeys,
                     access_secret = Accesstokensecret)
 
 # my account
-account <- "vladdsm"
+account <- "vladdsm"  #
+account <- "elonmusk" #a bit more mature account :)
 
 # read and move it to the dataframe format
-account.timeline_df <- userTimeline(user = account, n = 20, includeRts = TRUE) %>% 
+account_timeline_df <- userTimeline(user = account, n = 20, includeRts = TRUE) %>% 
   twListToDF()
 
