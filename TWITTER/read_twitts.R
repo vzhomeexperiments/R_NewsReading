@@ -13,3 +13,9 @@ account <- "elonmusk" #more serious account
 account.timeline_df <- userTimeline(user = account, n = 20, includeRts = TRUE) %>% 
   twListToDF()
 
+# read tweets by searching hashtags
+search_hash <- "#tesla"
+
+tweets <- searchTwitter(searchString = search_hash,
+                        n = 100, lang = "en") %>% 
+  twListToDF()
