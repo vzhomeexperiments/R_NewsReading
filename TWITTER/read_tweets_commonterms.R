@@ -9,20 +9,24 @@ source("TWITTER/establish_twitter_connection.R")
 library(qdap)
 library(magrittr)
 
-# establish twitter connection
+# establish twitter connection: function will insure the connection
 establish_twitter_connection()
 
 # read tweets by searching hashtags
 search_hash <- "#tesla"
 
 # get a list of tweets with searched term
-tweets.list <- searchTwitter(searchString = search_hash, n = 1500, lang = "en") %>%
+tweets_df <- searchTwitter(searchString = search_hash,
+                           n = 1500,
+                           lang = "en",
+                           since = NULL,
+                           until = NULL) %>%
   twListToDF()
 
 # Building corpus
 library(tm)
 
-corpus <- Corpus(VectorSource(tweets.list$text))
+corpus <- Corpus(VectorSource(tweets_df$text))
 inspect(corpus[1:3])
 
 # Cleaning
@@ -111,7 +115,7 @@ library(reshape2)
 library(tidyverse)
 
 #obtain setniment scorres
-sent_scores <- get_nrc_sentiment(tweets.list$text)
+sent_scores <- get_nrc_sentiment(tweets_df$text)
 head(sent_scores)
 
 #we can check sentiment of any word
@@ -125,3 +129,4 @@ barplot(colSums(sent_scores),
         col = rainbow(10),
         ylab = 'Count',
         main = 'Tweet')
+

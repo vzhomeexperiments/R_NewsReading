@@ -4,3 +4,5 @@ log/
 .RData
 .Rhistory
 .httr-oauth
+TWITTER/read_tweets_sentiment_sustainability.R
+TWITTER/read_tweets_wordcloud_sustainability.R

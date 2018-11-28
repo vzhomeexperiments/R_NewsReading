@@ -1,4 +1,4 @@
-#' Function to establish twitter connection
+#' Function to establish twitter connection. Must be personalized!!!
 #'
 #' @return
 #' @export
