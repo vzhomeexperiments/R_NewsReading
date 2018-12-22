@@ -7,3 +7,4 @@ log/
 TWITTER/read_tweets_sentiment_sustainability.R
 TWITTER/read_tweets_wordcloud_sustainability.R
 TWITTER_FINSEN/collect_sentiment_topic.Rout
+*.Rout
