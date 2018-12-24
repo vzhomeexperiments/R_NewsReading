@@ -39,9 +39,14 @@ train_sentiment_model <- function(joined_dataset, path_model){
   dat16 <- dat15 %>% na.omit()
   
   
-  # split data to train and test blocks
-  train_ind  <- 1:round(0.8*(nrow(dat16))) #train indices 1:xxx
-  dat21 <- dat16[-train_ind, ] #dataset to test the model using 30% of data
+  # # split data to train and test blocks 0.8 - training and 0.2 for test randomly
+  # smp_size <- floor(0.8 * nrow(dat16))
+  # train_ind  <- sample(seq_len(nrow(dat16)), size = smp_size)
+  
+  # split data to train and test blocks 0.8 - training and 0.2 for test non randomly
+  train_ind <- 1:round(0.8*(nrow(dat16))) #train indices 1:xxx
+  
+  dat21 <- dat16[-train_ind, ] #dataset to test the model using 20% of data
   dat22 <- dat16[train_ind,]   #dataset to train the model
   
   
@@ -64,7 +69,7 @@ train_sentiment_model <- function(joined_dataset, path_model){
     activation = "Tanh",
     overwrite_with_best_model = TRUE, 
     autoencoder = FALSE, 
-    hidden = c(20,10,3), 
+    hidden = c(8,5,3), 
     loss = "Automatic",
     sparse = TRUE,
     l1 = 1e-4,
@@ -82,6 +87,12 @@ train_sentiment_model <- function(joined_dataset, path_model){
   # use model to predict
   result <- h2o.predict(ModelC, recent_ML) %>% as.data.frame() %>% select(predict) #%>% round()
   
+  ## save obtained results to files - they will be used by the different function to test the strategy
+  # write data set for test with real data
+  write_rds(dat21, "C:/Users/fxtrams/Documents/000_TradingRepo/R_NewsReading/TWITTER_FINSEN/Model/truth_res.rds")
+  
+  # write predicted results 
+  write_rds(result, "C:/Users/fxtrams/Documents/000_TradingRepo/R_NewsReading/TWITTER_FINSEN/Model/predicted_res.rds")
   
   # save model
   h2o.saveModel(ModelC, path = path_model, force = T)

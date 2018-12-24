@@ -32,7 +32,7 @@ price_change <- predict_price_change(last_dataset = topic_scores_last,
 h2o.shutdown(prompt = F)
 
 # write prediction to the file (e.g. for MT4 usage)
-file_name <- paste0(as.character(Sys.time()), ".csv") %>% str_replace_all(":", "-")
+file_name <- paste0("predicted_at_", as.character(Sys.time()), ".csv") %>% str_replace_all(":", "-")
 write_csv(price_change, file.path(path_repository, "Logs", file_name))
 
           
