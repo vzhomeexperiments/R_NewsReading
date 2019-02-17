@@ -6,7 +6,8 @@ library(lubridate)
 
 ## Analyse model quality
 # file names
-filesToAnalyse <-list.files("C:/Users/fxtrams/Documents/000_TradingRepo/R_NewsReading/TWITTER_FINSEN/Logs/", pattern="model_quality_",
+filesToAnalyse <-list.files("C:/Users/fxtrams/Documents/000_TradingRepo/R_NewsReading/TWITTER_FINSEN/Logs/",
+                            pattern="model_quality_",
                             full.names=TRUE)
 # extract details from those files
 for (FILE in filesToAnalyse) {
