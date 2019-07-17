@@ -29,7 +29,7 @@ ggplot(S_LOG, aes(x = day, y = ave_pol)) + geom_line()+facet_grid(~country)+
 
 ggplot(S_LOG, aes(x = day, y = ave_pol)) + geom_line()+facet_grid(country~.)+
   geom_hline(aes(yintercept = 0, col = "zero"))+
-  ggtitle("Average Polarity Scores of News Headers by Country in 2018",
+  ggtitle("Average Polarity Scores of News Headers by Country from 2018-03 to 2019-03",
           "sourced from yahoo.ca, yahoo.us, yahoo.uk 3x day")
 
 # some data manipulation?
