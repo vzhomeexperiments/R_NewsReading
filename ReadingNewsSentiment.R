@@ -22,15 +22,16 @@ heads_CA <- urlCA %>% read_html() %>% html_nodes("h3") %>% html_text()
 heads_UK <- urlGB %>% read_html() %>% html_nodes("h3") %>% html_text()
 
 # get the polarity scores
-pol_US <- heads_US %>% polarity() #plot(pol_US)
-pol_CA <- heads_CA %>% polarity() #plot(pol_CA)
-pol_UK <- heads_UK %>% polarity() #plot(pol_UK)
+pol_US <- heads_US %>% qdap::polarity() #plot(pol_US)
+pol_CA <- heads_CA %>% qdap::polarity() #plot(pol_CA)
+pol_UK <- heads_UK %>% qdap::polarity() #plot(pol_UK)
 
 # extract average values
 ave_US <- pol_US$group$ave.polarity
 ave_CA <- pol_CA$group$ave.polarity
 ave_UK <- pol_UK$group$ave.polarity
 
+table(ave_US, ave_CA, ave_UK)
 # summary
 summmary_df <- data.frame(day = Sys.time(),
                           country = c('US', 'CA', 'UK'),
