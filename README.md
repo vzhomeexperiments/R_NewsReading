@@ -1,5 +1,11 @@
 # R_NewsReading
 
+Repository for the Udemy course. Please support this project by joining this on-line course:
+
+https://www.udemy.com/course/forex-news-and-sentiment-analysis/?referralCode=2B76F54F1D33CF06B79C
+
+Note: this course is the part of the series of step-by-step tutorials allowing to build more comprehensive Automated Trading System based on Decision Support System approach. Check out other courses of the series.
+
 # Purpose:
 
 ## Disable algorithmic trading robots during macro-economic events
@@ -27,13 +33,6 @@ Everything what is needed to arrange the 'news' reading:
 - Bat file
 - Windows Task Scheduler Job
 
-# Want to learn how to use it?
+## Disclaimer
 
-https://www.udemy.com/forex-news-and-sentiment-analysis/?couponCode=LAZYTRADE1-10
-
-Join these UDEMY courses with exclusive discount!
-
-* https://www.udemy.com/your-trading-journal/?couponCode=LAZYTRADE-GIT
-* https://www.udemy.com/your-trading-robot/?couponCode=LAZYTRADE-GIT
-* https://www.udemy.com/your-home-trading-environment/?couponCode=LAZYTRADE-GIT
-* https://www.udemy.com/your-trading-control-reinforcement-learning/?couponCode=LAZYTRADE4-10
+Use on your own risk
