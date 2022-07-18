@@ -28,10 +28,28 @@ R scripts allowing to:
 
 Everything what is needed to arrange the 'news' reading:
 
+- Setup Environmental Variables
 - R script
 - List of Restricted Events
 - Bat file
 - Windows Task Scheduler Job
+
+## Clone this repository
+
+Please clone this repository to the folder 
+
+"%USERPROFILE%\Documents\GitHub"
+
+## Environmental Variables
+
+Environmental variables could be edited by using template:
+
+`/_PROD/Set_Environment_Variables.bat`
+
+Edit this file and execute it
+
+(Note: you must restart R-Studio for the settings to take effect from R Studio)
+
 
 ## Disclaimer
 
